@@ -5,8 +5,7 @@ import pickle
 import pandas as pd
 
 # Load the saved pipeline
-with open('/content/pipe.pkl', 'rb') as f:
-    pipe = pickle.load(f)
+
 
 pipe=pickle.load(open('pipe.pkl','rb'))
 teams=['Sunrisers Hyderabad',
