@@ -1,6 +1,13 @@
 import streamlit as st
 import pickle 
 import pandas as pd
+import pickle
+import pandas as pd
+
+# Load the saved pipeline
+with open('/content/pipe.pkl', 'rb') as f:
+    pipe = pickle.load(f)
+
 pipe=pickle.load(open('pipe.pkl','rb'))
 teams=['Sunrisers Hyderabad',
  'Mumbai Indians',
@@ -73,3 +80,4 @@ with col4:
 last_five=st.number_input('runs scored in last 5 overs')
 if st.button('predict score'):
     pass
+
