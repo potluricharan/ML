@@ -78,5 +78,26 @@ with col4:
     over_done=st.number_input('overs done so far')
 last_five=st.number_input('runs scored in last 5 overs')
 if st.button('predict score'):
-    pass
+    overs_completed = int(over_done)
+    balls_in_current_over = int(round((over_done % 1) * 10))
+    balls_bowled = (overs_completed * 6) + balls_in_current_over
+    balls_left = 120 - balls_bowled
+    
+    # 2. Calculate Current Run Rate (named 'curr' in your model)
+    curr = current_score / over_done
 
+    # 3. Create input dataframe with EXACT column names from your model
+    input_df = pd.DataFrame({
+        'batting_team': [batting_team],
+        'bowling_team': [bowling_team],
+        'venue': [venue],
+        'current_score': [current_score],
+        'balls_bowled': [balls_bowled],
+        'balls_left': [balls_left],
+        'curr': [curr],
+        'last_five': [last_five]
+    })
+
+    # 4. Predict and Display
+    result = pipe.predict(input_df)
+    st.header(f"Predicted Final Score: {int(result[0])}")
