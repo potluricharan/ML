@@ -3,14 +3,7 @@ import pickle
 import pandas as pd
 import numpy as np
 
-# 1. Load the saved pipeline
-# Ensure 'pipe.pkl' is in the same folder as this script
-try:
-    pipe = pickle.load(open('pipe.pkl', 'rb'))
-except FileNotFoundError:
-    st.error("Error: 'pipe.pkl' not found. Ensure it is in the same directory as this script.")
 
-# 2. Data Lists
 teams = [
     'Sunrisers Hyderabad', 'Mumbai Indians', 'Kolkata Knight Riders',
     'Chennai Super Kings', 'Rajasthan Royals', 'Delhi Capitals',
@@ -37,18 +30,20 @@ venues = [
     'Vidarbha Cricket Association Stadium', 'De Beers Diamond Oval', 'Buffalo Park', 'OUTsurance Oval'
 ]
 
-# 3. Streamlit UI
-st.title('IPL Score Predictor')
+pipe=pickle.load(open('pipe.pkl','rb'))
+st.title("IPL score predictor")
 
-col1, col2 = st.columns(2)
+
+col1, col2 = st.beta_columns(2)
 
 with col1:
-    batting_team = st.selectbox('Select Batting Team', sorted(teams))
+    batting_team = st.selectbox('Select Batting Team',teams)
+
 with col2:
-    bowling_team = st.selectbox('Select Bowling Team', sorted(teams))
+    bowling_team = st.selectbox('Select Bowling Team', teams)
 
 # Fixed: uses 'venues' list and stores choice in 'selected_venue'
-selected_venue = st.selectbox('Select Venue', sorted(venues))
+selected_venue = st.selectbox('Select Venue', venues)
 
 col3, col4, col5 = st.columns(3)
 
