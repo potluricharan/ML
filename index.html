@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPL Score Predictor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>IPL First Innings Score Predictor</h1>
+        <form action="/predict" method="POST">
+            <div class="row">
+                <div class="group">
+                    <label>Batting Team</label>
+                    <select name="batting_team" required>
+                        <option value="" disabled selected>Select Batting Team</option>
+                        <option>Mumbai Indians</option>
+                        <option>Chennai Super Kings</option>
+                        <option>Royal Challengers Bengaluru</option>
+                        </select>
+                </div>
+                <div class="group">
+                    <label>Bowling Team</label>
+                    <select name="bowling_team" required>
+                        <option value="" disabled selected>Select Bowling Team</option>
+                        <option>Mumbai Indians</option>
+                        <option>Chennai Super Kings</option>
+                        <option>Royal Challengers Bengaluru</option>
+                        </select>
+                </div>
+            </div>
+
+            <div class="group">
+                <label>Venue</label>
+                <select name="venue" required>
+                    <option value="" disabled selected>Select Venue</option>
+                    <option>Wankhede Stadium</option>
+                    <option>Eden Gardens</option>
+                    <option>MA Chidambaram Stadium</option>
+                </select>
+            </div>
+
+            <div class="row">
+                <div class="group">
+                    <label>Current Score</label>
+                    <input type="number" name="current_score" placeholder="e.g. 100" required>
+                </div>
+                <div class="group">
+                    <label>Overs Done</label>
+                    <input type="number" step="0.1" name="overs" placeholder="e.g. 10.4" required>
+                </div>
+                <div class="group">
+                    <label>Runs in Last 5 Overs</label>
+                    <input type="number" name="last_five" placeholder="e.g. 45" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn">Predict Score</button>
+        </form>
+
+        {% if prediction %}
+        <div class="result">
+            <h2>Predicted Score: {{ prediction }}</h2>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
