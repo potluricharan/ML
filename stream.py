@@ -223,5 +223,7 @@ if st.button('Predict Score'):
             st.header(f"Predicted Final Score: **{int(prediction[0])}**")
             
         except Exception as e:
-            st.error(f"Prediction Error: {e}")
-            st.info("Check if your model expects exactly these column names and stadium strings.")
+            if "unknown categories" in str(e).lower() or "vocabulary" in str(e).lower():
+                st.info(f"📍 **Data Notice:** Our database currently lacks historical records for **{selected_venue}**. Please try a different stadium.")
+            else:
+                st.info("📝 **Note:** We are unable to calculate a prediction for this specific match setup at the moment.")
